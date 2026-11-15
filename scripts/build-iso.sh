@@ -30,8 +30,15 @@ done < "$B/.onboot"
 rm -f "$B/.onboot"
 
 # Overlay initrd, loaded after the stock one (files must be executable; git on Windows loses modes)
-chmod 755 "$ROOT/overlay/opt/bootlocal.sh" "$ROOT/overlay/home/tc/.xsession"
-(cd "$ROOT/overlay" && find . | cpio -o -H newc --quiet | gzip -9) > "$W/boot/overlay.gz"
+O="$B/overlay"; rm -rf "$O"; cp -r "$ROOT/overlay" "$O"
+chmod 755 "$O/opt/bootlocal.sh" "$O/home/tc/.xsession"
+
+# Windows XP style IceWM themes (themes/icewm-WindowsXP.tar.gz, from cRu572Vltn/icewm-windowsXP)
+mkdir -p "$O/home/tc/.icewm/themes"
+tar -xzf "$ROOT/themes/icewm-WindowsXP.tar.gz" -C "$O/home/tc/.icewm/themes" --strip-components=1
+echo 'Theme="WindowsXP_SilverMod/default.theme"' >> "$O/home/tc/.icewm/preferences"
+
+(cd "$O" && find . | cpio -o -H newc --quiet | gzip -9) > "$W/boot/overlay.gz"
 
 cat > "$W/boot/isolinux/isolinux.cfg" <<EOF
 DEFAULT chesscore

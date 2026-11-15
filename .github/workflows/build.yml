@@ -29,8 +29,6 @@ jobs:
         run: sh scripts/build-scid.sh
       - name: Build ChessX
         run: sh scripts/build-chessx.sh
-      - name: Package PyChess and Lucas Chess
-        run: sh scripts/build-python-apps.sh
       - name: Build ISO
         run: sh scripts/build-iso.sh
       - name: Report packages not available

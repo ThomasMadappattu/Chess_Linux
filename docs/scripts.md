@@ -43,18 +43,13 @@ Builds ChessX (CHESSX_REF, default master) with qmake against Qt 5 and packs che
 ## data/
 Sample game database (Lichess open database, CC0) - see data/README.md.
 
-## scripts/build-python-apps.sh
-Packages **PyChess** (`PYCHESS_TAG`, default 1.0.5 - later versions need Python 3.11+, Tiny Core
-has 3.9) and **Lucas Chess** as `.tcz` with the source and a launcher
-(`/usr/local/bin/pychess`, `/usr/local/bin/lucaschess`). On first launch the launcher creates
-`~/.chesscore/<app>-venv` (with system site-packages) and pip-installs missing Python
-dependencies, so network is needed once per boot (home is RAM-backed unless persistence is set up).
+## DOSBox-X
 **DOSBox-X** comes straight from the Tiny Core repo (`dosbox-x.tcz`).
 
 ## scripts/build-iso.sh
 1. Downloads the stock ISO (`TinyCorePure64-*`).
 2. Extracts it with `xorriso`, copies extensions to `cde/optional`, writes `cde/onboot.lst`.
-3. Packs `overlay/` into `boot/overlay.gz` (cpio newc) used as a second initrd.
+3. Copies `overlay/` to a staging dir, unpacks the Windows XP IceWM themes (`themes/icewm-WindowsXP.tar.gz`, Silver variant selected in `~/.icewm/preferences`; Olive and Zune are also included) into it, and packs it into `boot/overlay.gz` (cpio newc) used as a second initrd.
 4. Rewrites `isolinux.cfg` (kernel args `cde host=chesscore`) and builds a bootable ISO.
 
 Needs `xorriso`, `cpio`, `gzip`, `curl`.

@@ -3,8 +3,6 @@ menu "Chess" - {
   prog "Cute Chess" - cutechess
   prog "Scid" - scid
   prog "ChessX" - chessx
-  prog "PyChess" - pychess
-  prog "Lucas Chess" - lucaschess
 }
 prog "DOSBox-X" - dosbox-x
 menu "Chess engines (terminal)" - {

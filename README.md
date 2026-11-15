@@ -15,7 +15,7 @@ a forgotten machine into a complete chess workstation, with no cost and no
 e-waste.
 
 **For chess enthusiasts:** play, analyse, study and manage game databases with
-Cute Chess, Scid, ChessX, PyChess, Lucas Chess, Stockfish, Ethereal and GNU Chess, plus DOSBox-X
+Cute Chess, Scid, ChessX, Stockfish, Ethereal and GNU Chess, plus DOSBox-X
 for classic DOS chess programs.
 
 **For the planet and your wallet:** reuse hardware instead of discarding it.
@@ -31,3 +31,5 @@ A sample of the [Lichess open database](https://database.lichess.org) (CC0) is i
     sh scripts/build-iso.sh        # build/chesscore-*.iso
 
 GitHub Actions builds the ISO automatically. Details: [docs/scripts.md](docs/scripts.md).
+
+Desktop theme: Windows XP style IceWM themes from [cRu572Vltn/icewm-windowsXP](https://github.com/cRu572Vltn/icewm-windowsXP).
