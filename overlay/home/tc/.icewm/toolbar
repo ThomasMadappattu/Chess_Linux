@@ -1,2 +1,5 @@
 prog "Cute Chess" - cutechess
+prog "Scid" - scid
+prog "PyChess" - pychess
+prog "Lucas Chess" - lucaschess
 prog "Terminal" - aterm

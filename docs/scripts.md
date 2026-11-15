@@ -33,6 +33,18 @@ this script compiles Stockfish (`STOCKFISH_TAG`) and GNU Chess (`GNUCHESS_VER`)
 from source as static binaries and packs each into a `.tcz` (squashfs) in
 `build/optional/`. Needs `build-essential git curl squashfs-tools`.
 
+## scripts/build-scid.sh
+Builds Scid (`SCID_TAG`, default v5.1.0) with CMake against Tcl/Tk 8.6 and packs `scid.tcz`
+(`.dep`: tcl8.6, tk8.6). Build on Ubuntu 22.04 so glibc is compatible with Tiny Core.
+
+## scripts/build-python-apps.sh
+Packages **PyChess** (`PYCHESS_TAG`, default 1.0.5 - later versions need Python 3.11+, Tiny Core
+has 3.9) and **Lucas Chess** as `.tcz` with the source and a launcher
+(`/usr/local/bin/pychess`, `/usr/local/bin/lucaschess`). On first launch the launcher creates
+`~/.chesscore/<app>-venv` (with system site-packages) and pip-installs missing Python
+dependencies, so network is needed once per boot (home is RAM-backed unless persistence is set up).
+**DOSBox-X** comes straight from the Tiny Core repo (`dosbox-x.tcz`).
+
 ## scripts/build-iso.sh
 1. Downloads the stock ISO (`TinyCorePure64-*`).
 2. Extracts it with `xorriso`, copies extensions to `cde/optional`, writes `cde/onboot.lst`.

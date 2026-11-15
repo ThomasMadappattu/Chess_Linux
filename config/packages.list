@@ -7,3 +7,15 @@ wbar
 aterm
 nano
 cutechess
+dosbox-x
+tcl8.6
+tk8.6
+python3.9
+python3.9-pip
+pygobject
+gtk3
+gtksourceview
+gtksourceview-gir
+py3.9cairo
+python3.9-psutil
+libGL

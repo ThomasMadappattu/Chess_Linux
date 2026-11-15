@@ -1,5 +1,11 @@
 prog "Terminal" - aterm
-prog "Cute Chess" - cutechess
+menu "Chess" - {
+  prog "Cute Chess" - cutechess
+  prog "Scid" - scid
+  prog "PyChess" - pychess
+  prog "Lucas Chess" - lucaschess
+}
+prog "DOSBox-X" - dosbox-x
 menu "Chess engines (terminal)" - {
   prog "GNU Chess" - aterm -e gnuchess
   prog "Stockfish" - aterm -e stockfish

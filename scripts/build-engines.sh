@@ -31,7 +31,7 @@ pack stockfish "$S"
 # --- GNU Chess ---
 [ -f gnuchess.tar.gz ] || curl -fsSL -o gnuchess.tar.gz "https://ftp.gnu.org/gnu/chess/gnuchess-$GNUCHESS_VER.tar.gz"
 rm -rf "gnuchess-$GNUCHESS_VER"; tar xzf gnuchess.tar.gz
-(cd "gnuchess-$GNUCHESS_VER" && ./configure --prefix=/usr/local --without-readline LDFLAGS=-static >/dev/null && make -j"$(nproc)" >/dev/null)
+(cd "gnuchess-$GNUCHESS_VER" && chmod +x install-sh && ./configure --prefix=/usr/local --without-readline LDFLAGS=-static >/dev/null && make -j"$(nproc)" >/dev/null)
 S="$WORK/stage-gnuchess"; rm -rf "$S"
 (cd "gnuchess-$GNUCHESS_VER" && make install DESTDIR="$S" >/dev/null)
 strip "$S/usr/local/bin/gnuchess" || true
