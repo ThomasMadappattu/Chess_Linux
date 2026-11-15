@@ -1,0 +1,16 @@
+# Extensions loaded at boot (subset of packages.list; deps are pulled in automatically).
+Xorg-7.7
+icewm
+wbar
+aterm
+xboard
+eboard
+pychess
+scid
+chessx
+gnuchess
+stockfish
+crafty
+fairymax
+polyglot
+sjeng

@@ -1,0 +1,14 @@
+prog "Terminal" - aterm
+menu "Chess GUIs" - {
+  prog "XBoard" - xboard
+  prog "Eboard" - eboard
+  prog "PyChess" - pychess
+  prog "Scid" - scid
+  prog "ChessX" - chessx
+}
+menu "Chess engines (terminal)" - {
+  prog "GNU Chess" - aterm -e gnuchess
+  prog "Stockfish" - aterm -e stockfish
+  prog "Crafty" - aterm -e crafty
+  prog "Sjeng" - aterm -e sjeng
+}
