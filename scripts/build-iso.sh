@@ -38,7 +38,12 @@ mkdir -p "$O/home/tc/.icewm/themes"
 tar -xzf "$ROOT/themes/icewm-WindowsXP.tar.gz" -C "$O/home/tc/.icewm/themes" --strip-components=1
 echo 'Theme="WindowsXP_SilverMod/default.theme"' >> "$O/home/tc/.icewm/preferences"
 
-(cd "$O" && find . | cpio -o -H newc --quiet | gzip -9) > "$W/boot/overlay.gz"
+(
+  cd "$O"
+  # Ship /home/tc owned by tc:staff (1001:50) so the session never races with bootlocal.sh's chown
+  find home | cpio -o -H newc -R 1001:50 --quiet
+  find opt | cpio -o -H newc -R 0:0 --quiet
+) | gzip -9 > "$W/boot/overlay.gz"
 
 cat > "$W/boot/isolinux/isolinux.cfg" <<EOF
 DEFAULT chesscore
