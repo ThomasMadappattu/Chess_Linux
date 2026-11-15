@@ -15,7 +15,7 @@ a forgotten machine into a complete chess workstation, with no cost and no
 e-waste.
 
 **For chess enthusiasts:** play, analyse, study and manage game databases with
-Cute Chess, Scid, PyChess, Lucas Chess, Stockfish and GNU Chess, plus DOSBox-X
+Cute Chess, Scid, PyChess, Lucas Chess, Stockfish, Ethereal and GNU Chess, plus DOSBox-X
 for classic DOS chess programs.
 
 **For the planet and your wallet:** reuse hardware instead of discarding it.

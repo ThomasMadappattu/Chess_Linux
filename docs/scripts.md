@@ -29,7 +29,7 @@ verifies md5, recurses through dependencies. Needs `curl`, `md5sum`.
 
 ## scripts/build-engines.sh
 The Tiny Core repo has no chess engines (only the `cutechess` GUI on x86_64), so
-this script compiles Stockfish (`STOCKFISH_TAG`) and GNU Chess (`GNUCHESS_VER`)
+this script compiles Stockfish (`STOCKFISH_TAG`), GNU Chess (`GNUCHESS_VER`) and Ethereal (`ETHEREAL_TAG`, classical eval)
 from source as static binaries and packs each into a `.tcz` (squashfs) in
 `build/optional/`. Needs `build-essential git curl squashfs-tools`.
 

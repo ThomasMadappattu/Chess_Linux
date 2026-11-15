@@ -36,3 +36,11 @@ S="$WORK/stage-gnuchess"; rm -rf "$S"
 (cd "gnuchess-$GNUCHESS_VER" && make install DESTDIR="$S" >/dev/null)
 strip "$S/usr/local/bin/gnuchess" || true
 pack gnuchess "$S"
+
+# --- Ethereal (classical eval, portable x86-64, no popcnt/NNUE) ---
+cd "$WORK"
+rm -rf Ethereal; git clone -q --depth 1 --branch "${ETHEREAL_TAG:-v14.00}" https://github.com/AndyGrant/Ethereal.git
+(cd Ethereal/src && gcc -O3 -std=gnu11 -DNDEBUG -DUSE_NNUE=0 -static -o ethereal *.c pyrrhic/tbprobe.c -lpthread -lm)
+S="$WORK/stage-ethereal"; rm -rf "$S"; mkdir -p "$S/usr/local/bin"
+install -m 755 Ethereal/src/ethereal "$S/usr/local/bin/ethereal"
+pack ethereal "$S"

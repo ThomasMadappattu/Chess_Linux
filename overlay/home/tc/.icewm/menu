@@ -9,4 +9,5 @@ prog "DOSBox-X" - dosbox-x
 menu "Chess engines (terminal)" - {
   prog "GNU Chess" - aterm -e gnuchess
   prog "Stockfish" - aterm -e stockfish
+  prog "Ethereal" - aterm -e ethereal
 }
