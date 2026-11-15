@@ -21,17 +21,21 @@ fetch() { # name.tcz -> 0 on success
 }
 
 get() {
+  local n d
   n=${1%.tcz}.tcz
-  [ -f "$DEST/$n" ] && return 0
+  if [ -f "$DEST/$n" ]; then return 0; fi
   if fetch "$n"; then
     echo "fetched $n"
     if [ -f "$DEST/$n.dep" ]; then
-      while read -r d; do [ -n "$d" ] && get "$d"; done < "$DEST/$n.dep"
+      while read -r d; do
+        if [ -n "$d" ]; then get "$d"; fi
+      done < "$DEST/$n.dep"
     fi
   else
     echo "WARN: $n not available for $TC_ARCH" >&2
     echo "$n" >> "$MISSING"
   fi
+  return 0
 }
 
 grep -v '^[[:space:]]*\(#\|$\)' "$LIST" > "$DEST/../.pkgs"

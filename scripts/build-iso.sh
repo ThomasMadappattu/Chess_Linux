@@ -25,7 +25,7 @@ cp "$B"/optional/* "$W/cde/optional/"
 : > "$W/cde/onboot.lst"
 grep -v '^[[:space:]]*\(#\|$\)' "$ROOT/config/onboot.list" > "$B/.onboot"
 while read -r p; do
-  [ -f "$W/cde/optional/${p%.tcz}.tcz" ] && echo "${p%.tcz}.tcz" >> "$W/cde/onboot.lst"
+  if [ -f "$W/cde/optional/${p%.tcz}.tcz" ]; then echo "${p%.tcz}.tcz" >> "$W/cde/onboot.lst"; fi
 done < "$B/.onboot"
 rm -f "$B/.onboot"
 
