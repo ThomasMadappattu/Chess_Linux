@@ -1,0 +1,4 @@
+prog "Cute Chess" - cutechess
+prog "Scid" - scid
+prog "ChessX" - chessx
+prog "Terminal" - aterm

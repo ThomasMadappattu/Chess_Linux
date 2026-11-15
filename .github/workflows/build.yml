@@ -1,0 +1,48 @@
+name: Build ChessCore ISO
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * 1"   # weekly refresh of Tiny Core packages
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04   # glibc <= Tiny Core's, so dynamically linked Scid runs
+    env:
+      TC_ARCH: x86_64
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y xorriso cpio curl squashfs-tools build-essential git cmake tcl8.6-dev tk8.6-dev qtbase5-dev qttools5-dev-tools qtmultimedia5-dev libqt5svg5-dev zlib1g-dev libgtk2.0-dev pkg-config libx11-dev libxxf86vm-dev libsm-dev
+      - name: Fetch Tiny Core packages
+        run: sh scripts/fetch-packages.sh
+      - name: Build chess engines (static, packaged as .tcz)
+        run: sh scripts/build-engines.sh
+      - name: Build Scid
+        run: sh scripts/build-scid.sh
+      - name: Build ChessX
+        run: sh scripts/build-chessx.sh
+      - name: Build Tarrasch (static wxWidgets)
+        run: sh scripts/build-tarrasch.sh
+      - name: Build ISO
+        run: sh scripts/build-iso.sh
+      - name: Report packages not available
+        run: cat build/missing.txt || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chesscore-x86_64
+          path: |
+            build/*.iso
+            build/missing.txt
+      - name: Release on tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/*.iso

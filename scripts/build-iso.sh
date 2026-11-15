@@ -1,0 +1,67 @@
+#!/bin/sh
+# Remaster the Tiny Core ISO: add extensions under /cde, overlay config, icewm.
+# Requires: curl, xorriso, cpio, gzip.
+# Usage: scripts/build-iso.sh
+set -eu
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+. "$ROOT/config/build.conf"
+B="$ROOT/$OUT_DIR"; mkdir -p "$B"
+
+case $TC_ARCH in
+  x86_64) SRC_ISO=TinyCorePure64-$TC_RELEASE.iso; KERNEL=vmlinuz64; INITRD=corepure64.gz ;;
+  *)      SRC_ISO=TinyCore-$TC_RELEASE.iso;       KERNEL=vmlinuz;   INITRD=core.gz ;;
+esac
+
+[ -f "$B/$SRC_ISO" ] || curl -fL -o "$B/$SRC_ISO" "$TC_MIRROR/$TC_VERSION/$TC_ARCH/release/$SRC_ISO"
+[ -d "$B/optional" ] || sh "$ROOT/scripts/fetch-packages.sh"
+
+W="$B/iso"; rm -rf "$W"; mkdir -p "$W"
+xorriso -osirrox on -indev "$B/$SRC_ISO" -extract / "$W" 2>/dev/null
+chmod -R u+w "$W"
+
+# Extensions (the "cde" boot code loads /cde/onboot.lst from the CD)
+mkdir -p "$W/cde/optional"
+cp "$B"/optional/* "$W/cde/optional/"
+: > "$W/cde/onboot.lst"
+grep -v '^[[:space:]]*\(#\|$\)' "$ROOT/config/onboot.list" > "$B/.onboot"
+while read -r p; do
+  if [ -f "$W/cde/optional/${p%.tcz}.tcz" ]; then echo "${p%.tcz}.tcz" >> "$W/cde/onboot.lst"; fi
+done < "$B/.onboot"
+rm -f "$B/.onboot"
+
+# Overlay initrd, loaded after the stock one (files must be executable; git on Windows loses modes)
+O="$B/overlay"; rm -rf "$O"; cp -r "$ROOT/overlay" "$O"
+chmod 755 "$O/opt/bootlocal.sh" "$O/home/tc/.xsession"
+
+# Windows XP style IceWM themes (themes/icewm-WindowsXP.tar.gz, from cRu572Vltn/icewm-windowsXP)
+mkdir -p "$O/home/tc/.icewm/themes"
+tar -xzf "$ROOT/themes/icewm-WindowsXP.tar.gz" -C "$O/home/tc/.icewm/themes" --strip-components=1
+echo 'Theme="WindowsXP_SilverMod/default.theme"' >> "$O/home/tc/.icewm/preferences"
+
+(
+  cd "$O"
+  # Ship /home/tc owned by tc:staff (1001:50) so the session never races with bootlocal.sh's chown
+  find home | cpio -o -H newc -R 1001:50 --quiet
+  find opt | cpio -o -H newc -R 0:0 --quiet
+) | gzip -9 > "$W/boot/overlay.gz"
+
+cat > "$W/boot/isolinux/isolinux.cfg" <<EOF
+DEFAULT shell
+PROMPT 1
+TIMEOUT 100
+LABEL shell
+  MENU LABEL ChessCore - shell, no X (run startx manually)
+  KERNEL /boot/$KERNEL
+  INITRD /boot/$INITRD,/boot/overlay.gz
+  APPEND cde waitusb=5 host=chesscore text
+LABEL chesscore
+  MENU LABEL ChessCore - desktop (auto start X)
+  KERNEL /boot/$KERNEL
+  INITRD /boot/$INITRD,/boot/overlay.gz
+  APPEND cde waitusb=5 host=chesscore
+EOF
+
+xorriso -as mkisofs -R -J -iso-level 3 -V CHESSCORE -o "$B/$ISO_NAME" \
+  -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat \
+  -no-emul-boot -boot-load-size 4 -boot-info-table "$W"
+echo "Built $B/$ISO_NAME"
