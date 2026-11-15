@@ -39,10 +39,10 @@ TIMEOUT 50
 LABEL chesscore
   KERNEL /boot/$KERNEL
   INITRD /boot/$INITRD,/boot/overlay.gz
-  APPEND quiet cde waitusb=5 host=chesscore
+  APPEND cde waitusb=5 host=chesscore
 EOF
 
-xorriso -as mkisofs -iso-level 3 -V CHESSCORE -o "$B/$ISO_NAME" \
+xorriso -as mkisofs -R -J -iso-level 3 -V CHESSCORE -o "$B/$ISO_NAME" \
   -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat \
   -no-emul-boot -boot-load-size 4 -boot-info-table "$W"
 echo "Built $B/$ISO_NAME"
