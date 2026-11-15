@@ -37,6 +37,12 @@ from source as static binaries and packs each into a `.tcz` (squashfs) in
 Builds Scid (`SCID_TAG`, default v5.1.0) with CMake against Tcl/Tk 8.6 and packs `scid.tcz`
 (`.dep`: tcl8.6, tk8.6). Build on Ubuntu 22.04 so glibc is compatible with Tiny Core.
 
+## scripts/build-chessx.sh
+Builds ChessX (CHESSX_REF, default master) with qmake against Qt 5 and packs chessx.tcz (.dep: qt-5.x-all).
+
+## data/
+Sample game database (Lichess open database, CC0) - see data/README.md.
+
 ## scripts/build-python-apps.sh
 Packages **PyChess** (`PYCHESS_TAG`, default 1.0.5 - later versions need Python 3.11+, Tiny Core
 has 3.9) and **Lucas Chess** as `.tcz` with the source and a launcher

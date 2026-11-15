@@ -1,5 +1,6 @@
 prog "Cute Chess" - cutechess
 prog "Scid" - scid
+prog "ChessX" - chessx
 prog "PyChess" - pychess
 prog "Lucas Chess" - lucaschess
 prog "Terminal" - aterm
