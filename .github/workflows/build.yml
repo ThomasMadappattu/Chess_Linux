@@ -29,6 +29,8 @@ jobs:
         run: sh scripts/build-scid.sh
       - name: Build ChessX
         run: sh scripts/build-chessx.sh
+      - name: Build Tarrasch (static wxWidgets)
+        run: sh scripts/build-tarrasch.sh
       - name: Build ISO
         run: sh scripts/build-iso.sh
       - name: Report packages not available

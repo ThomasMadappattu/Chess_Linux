@@ -40,6 +40,9 @@ Builds Scid (`SCID_TAG`, default v5.1.0) with CMake against Tcl/Tk 8.6 and packs
 ## scripts/build-chessx.sh
 Builds ChessX (CHESSX_REF, default master) with qmake against Qt 5 and packs chessx.tcz (.dep: qt-5.x-all).
 
+## scripts/build-tarrasch.sh
+Builds Tarrasch Chess GUI (TARRASCH_REF, default tarrasch-v3.13b) against a statically linked, minimal wxWidgets (WX_VER, default 3.0.5.1, GTK2, bundled image libs) so only gtk2.tcz is loaded at runtime (low RAM). Installs to /usr/local/share/tarrasch with a /usr/local/bin/tarrasch launcher.
+
 ## data/
 Sample game database (Lichess open database, CC0) - see data/README.md.
 
