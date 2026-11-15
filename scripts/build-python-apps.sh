@@ -50,4 +50,4 @@ rm -rf lucaschess; git clone -q --depth 1 https://github.com/lukasmonk/lucasches
 S="$WORK/stage-lucaschess"; rm -rf "$S"; mkdir -p "$S/usr/local/bin" "$S/usr/local/share"
 rm -rf lucaschess/.git; cp -r lucaschess "$S/usr/local/share/lucaschess"
 launcher "$S" lucaschess /usr/local/share/lucaschess/bin 'chardet sortedcontainers python-chess pillow pyside2 psutil polib deep_translator requests urllib3 idna certifi bs4' 'LucasR.py'
-pack lucaschess "$S" "python3.9.tcz python3.9-pip.tcz libGL.tcz Xorg-7.7-lib.tcz"; echo "built lucaschess.tcz"
+pack lucaschess "$S" "python3.9.tcz python3.9-pip.tcz libGL.tcz libEGL.tcz Xorg-7.7-lib.tcz libxcb.tcz libxkbcommon.tcz fontconfig.tcz freetype.tcz glib2.tcz dbus.tcz ca-certificates.tcz openssl.tcz"; echo "built lucaschess.tcz"

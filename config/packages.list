@@ -19,3 +19,12 @@ gtksourceview-gir
 py3.9cairo
 python3.9-psutil
 libGL
+libEGL
+libxcb
+libxkbcommon
+fontconfig
+freetype
+glib2
+dbus
+ca-certificates
+openssl
