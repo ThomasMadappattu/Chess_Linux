@@ -53,7 +53,7 @@ Sample game database (Lichess open database, CC0) - see data/README.md.
 1. Downloads the stock ISO (`TinyCorePure64-*`).
 2. Extracts it with `xorriso`, copies extensions to `cde/optional`, writes `cde/onboot.lst`.
 3. Copies `overlay/` to a staging dir, unpacks the Windows XP IceWM themes (`themes/icewm-WindowsXP.tar.gz`, Silver variant selected in `~/.icewm/preferences`; Olive and Zune are also included) into it, and packs it into `boot/overlay.gz` (cpio newc) used as a second initrd.
-4. Rewrites `isolinux.cfg` (kernel args `cde host=chesscore`) and builds a bootable ISO.
+4. Rewrites `isolinux.cfg` with two boot entries and builds a bootable ISO: **shell** (default for now, kernel arg `text`: no X, log in as `tc` and run `startx` manually; `sudo -i` gives root) and **desktop** (auto-starts X/IceWM). Append `chessdebug` to the kernel line to dump X diagnostics to `ttyS0`.
 
 Needs `xorriso`, `cpio`, `gzip`, `curl`.
 

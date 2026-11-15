@@ -46,10 +46,16 @@ echo 'Theme="WindowsXP_SilverMod/default.theme"' >> "$O/home/tc/.icewm/preferenc
 ) | gzip -9 > "$W/boot/overlay.gz"
 
 cat > "$W/boot/isolinux/isolinux.cfg" <<EOF
-DEFAULT chesscore
-PROMPT 0
-TIMEOUT 50
+DEFAULT shell
+PROMPT 1
+TIMEOUT 100
+LABEL shell
+  MENU LABEL ChessCore - shell, no X (run startx manually)
+  KERNEL /boot/$KERNEL
+  INITRD /boot/$INITRD,/boot/overlay.gz
+  APPEND cde waitusb=5 host=chesscore text
 LABEL chesscore
+  MENU LABEL ChessCore - desktop (auto start X)
   KERNEL /boot/$KERNEL
   INITRD /boot/$INITRD,/boot/overlay.gz
   APPEND cde waitusb=5 host=chesscore
