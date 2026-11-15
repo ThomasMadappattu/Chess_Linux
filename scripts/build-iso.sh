@@ -29,7 +29,8 @@ while read -r p; do
 done < "$B/.onboot"
 rm -f "$B/.onboot"
 
-# Overlay initrd, loaded after the stock one
+# Overlay initrd, loaded after the stock one (files must be executable; git on Windows loses modes)
+chmod 755 "$ROOT/overlay/opt/bootlocal.sh" "$ROOT/overlay/home/tc/.xsession"
 (cd "$ROOT/overlay" && find . | cpio -o -H newc --quiet | gzip -9) > "$W/boot/overlay.gz"
 
 cat > "$W/boot/isolinux/isolinux.cfg" <<EOF
