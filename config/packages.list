@@ -1,32 +1,9 @@
 # Tiny Core extensions (without .tcz). Dependencies are resolved automatically.
-# Packages missing from the selected repository are skipped with a warning.
-
-# --- Desktop base ---
+# Packages missing from the repository are skipped with a warning.
+# Chess engines (stockfish, gnuchess) are built by scripts/build-engines.sh.
 Xorg-7.7
 icewm
 wbar
 aterm
 nano
-# --- Chess GUIs ---
-xboard
-eboard
-pychess
-scid
-chessx
-gnome-chess
-glchess
-knights
-# --- Chess engines ---
-gnuchess
-stockfish
-crafty
-fairymax
-polyglot
-arasan
-sjeng
-fruit
-toga
-phalanx
-# --- Databases / tools ---
-scid_vs_pc
-pgn-extract
+cutechess

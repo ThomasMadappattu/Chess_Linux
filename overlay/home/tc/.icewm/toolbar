@@ -1,4 +1,2 @@
-prog "XBoard" - xboard
-prog "PyChess" - pychess
-prog "Scid" - scid
+prog "Cute Chess" - cutechess
 prog "Terminal" - aterm
