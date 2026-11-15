@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200" role="img" aria-label="Chessix Linux logo">
+  <title>Chessix Linux</title>
+  <defs>
+    <clipPath id="sq"><rect x="8" y="8" width="184" height="184" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#sq)">
+    <rect x="8" y="8" width="184" height="184" fill="#2e5b3a"/>
+    <g fill="#e8e2c8">
+      <rect x="8" y="8" width="46" height="46"/><rect x="100" y="8" width="46" height="46"/>
+      <rect x="54" y="54" width="46" height="46"/><rect x="146" y="54" width="46" height="46"/>
+      <rect x="8" y="100" width="46" height="46"/><rect x="100" y="100" width="46" height="46"/>
+      <rect x="54" y="146" width="46" height="46"/><rect x="146" y="146" width="46" height="46"/>
+    </g>
+  </g>
+  <!-- knight -->
+  <path fill="#14202b" stroke="#e8e2c8" stroke-width="3" stroke-linejoin="round"
+        d="M62 168h76c-1-14-4-24-10-32 14-10 22-26 18-46-3-16-16-30-36-34l-4-14-14 14c-14 4-26 14-32 30l-8 10 18 12 12-12c4-3 8-3 10 0-12 14-18 30-14 52z"/>
+  <circle cx="116" cy="70" r="4" fill="#e8e2c8"/>
+  <!-- recycle arrows -->
+  <g fill="none" stroke="#f2b134" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 40a60 60 0 0 1 52-24"/><path d="M84 6l10 10-12 8"/>
+    <path d="M168 150a60 60 0 0 1-46 30"/><path d="M130 190l-10-10 12-8"/>
+  </g>
+  <text x="216" y="104" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="68" font-weight="700" fill="#14202b">Chessix</text>
+  <text x="220" y="140" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="30" letter-spacing="10" fill="#2e5b3a">LINUX</text>
+  <text x="220" y="170" font-family="Segoe UI,Helvetica,Arial,sans-serif" font-size="16" fill="#555">Revive old PCs. Play better chess.</text>
+</svg>
